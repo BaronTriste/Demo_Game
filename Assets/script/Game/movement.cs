@@ -6,30 +6,57 @@ public class movement : MonoBehaviour
 {
     public float speed;
     public GameObject dialog;
+    public GameObject Inv;
+    public GameObject Map;
+    public bool inInv;
+    public bool inmap;
     public bool down;
     public bool up;
     public bool right;
     public bool left;
+    public GameObject life3;
+    public GameObject life2;
+    public GameObject life1;
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()    
     {
+        life1 = GameObject.Find("life");
+        life2 = GameObject.Find("life (1)");
+        life3 = GameObject.Find("life (2)");
         down = false;
         up = false;
         right = false;
         left = false;
+        inInv = false;
+        inmap = false;
+        GameObject.Find("slot1").GetComponent<TMPro.TextMeshProUGUI>().text = "- " + GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().inventory[0];
+        GameObject.Find("slot2").GetComponent<TMPro.TextMeshProUGUI>().text = "- " + GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().inventory[1];
+        GameObject.Find("slot3").GetComponent<TMPro.TextMeshProUGUI>().text = "- " + GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().inventory[2];
+        GameObject.Find("slot4").GetComponent<TMPro.TextMeshProUGUI>().text = "- " + GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().inventory[3];
+        GameObject.Find("slot5").GetComponent<TMPro.TextMeshProUGUI>().text = "- " + GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().inventory[4];
+        GameObject.Find("slot6").GetComponent<TMPro.TextMeshProUGUI>().text = "- " + GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().inventory[5];
         dialog = GameObject.Find("dialogue");
+        Inv = GameObject.Find("invotoryM");
+        Map = GameObject.Find("mapi");
+        Map.SetActive(false);
+        Inv.SetActive(false);
         dialog.SetActive(false);
+        if (GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().Life <= 0)
+        {
+            life1.SetActive(false);
+        }
         if (GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().Life <= 1)
         {
-            GameObject.Find("life (1)").SetActive(false);
+            life2.SetActive(false);
         }
         if (GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().Life <= 2)
         {
-            GameObject.Find("life (2)").SetActive(false);
+            life3.SetActive(false);
         }
         GameObject.FindGameObjectWithTag("Player").transform.position = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().posPlayer;
-        speed = 0.18f;
+        speed = 20f;
     }
 
     void FixedUpdate()
@@ -40,27 +67,53 @@ public class movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 dp = new Vector3();
-        if (Input.GetKey(KeyCode.Q) && !left)
+        if (!GameObject.Find("PNG").GetComponent<PNG_script>().indialog)
         {
-            GameObject.Find("Player").GetComponent<SpriteRenderer>().flipX = true;
-            dp.x -= speed;
-        }
-        if (Input.GetKey(KeyCode.D) && !right)
+            animator.SetBool("intalk", false);
+            //Vector3 dp = new Vector3();
+            if (Input.GetKey(KeyCode.Q) && !left && !inInv && !inmap)
+            {
+                GameObject.Find("Player").GetComponent<SpriteRenderer>().flipX = true;
+                transform.position -= new Vector3(speed * Time.deltaTime, 0.0f, 0.0f);
+            }
+            if (Input.GetKey(KeyCode.D) && !right && !inInv && !inmap)
+            {
+                GameObject.Find("Player").GetComponent<SpriteRenderer>().flipX = false;
+                transform.position += new Vector3(speed * Time.deltaTime, 0.0f, 0.0f);
+            }
+            if (Input.GetKey(KeyCode.S) && !down && !inInv && !inmap)
+            {
+                transform.position -= new Vector3(0.0f, speed * Time.deltaTime, 0.0f);
+            }
+            if (Input.GetKey(KeyCode.Z) && !up && !inInv && !inmap)
+            {
+                transform.position += new Vector3(0.0f, speed * Time.deltaTime, 0.0f);
+            }
+            if (Input.GetKeyDown(KeyCode.M) && inmap && !inInv)
+            {
+                Map.SetActive(false);
+                inmap = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.M) && !inmap && !inInv)
+            {
+                Map.SetActive(true);
+                inmap = true;
+            }
+            if (Input.GetKeyDown(KeyCode.I) && inInv && !inmap)
+            {
+                Inv.SetActive(false);
+                inInv = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.I) && !inmap && !inInv)
+            {
+                Inv.SetActive(true);
+                inInv = true;
+            }
+        } else
         {
-            GameObject.Find("Player").GetComponent<SpriteRenderer>().flipX = false;
-            dp.x += speed;
         }
-        if (Input.GetKey(KeyCode.S) && !down)
-        {
-            dp.y -= speed;
-        }
-        if (Input.GetKey(KeyCode.Z) && !up)
-        {
-            dp.y += speed;
-        }
-        transform.position += dp;
     }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "wall right")

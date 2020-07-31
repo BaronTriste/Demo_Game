@@ -588,6 +588,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1340237291}
   m_CullTransparentMesh: 0
+--- !u!1 &1736648723
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1736648724}
+  - component: {fileID: 1736648725}
+  m_Layer: 0
+  m_Name: Save_Load_Sys
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1736648724
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736648723}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.797354, y: -4.7374935, z: -4.59375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1736648725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736648723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeadf8022e96b034dbf62265d1747008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2096082646
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,6 +662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Life: 0
   obj: {fileID: 0}
+  nbActualFigth: 0
   ennemieG: 00000000000000000000000000000000000000000000000000000000
   battleEnnemie:
   - 
@@ -654,37 +698,52 @@ MonoBehaviour:
   - 
   - 
   all_text:
-  - "Esp\xE8ce de croco pas bo !"
-  - Le bleu c pas bo !
-  - 
-  - 
-  - 
-  - "Inflige de gros d\xE9gat"
-  - "Inflige de faible d\xE9gat, inflige 'triste' \xE0 un ennemi"
-  - 
-  - 
-  - 
-  - squelette
-  - zombie
-  - rat
-  - "Le n\xE9cromancien"
-  - Le roi des rats
-  - 
-  - potion
   - 
   - 
   - 
   - 
   - 
-  - Soigne un coeur
   - 
   - 
   - 
   - 
   - 
-  - Lance une insulte !
-  - Utilise un objet de ton inventaire
-  - Fuir le combat
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
