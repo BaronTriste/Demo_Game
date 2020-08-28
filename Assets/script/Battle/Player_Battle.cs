@@ -110,8 +110,8 @@ public class Player_Battle : MonoBehaviour
     {
         if (GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().inventory[menu2] == GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().all_text[16] && GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().Life != 3)
             GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().Life++;
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().inventory[menu2] = "";
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().inventoryTexte[menu2] = "";
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().inventory[menu2] = " ";
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().inventoryTexte[menu2] = " ";
         int i = menu2 + 1;
         GameObject.Find("slot" + i.ToString()).GetComponent<TMPro.TextMeshProUGUI>().text = "- ";
     }
@@ -173,6 +173,7 @@ public class Player_Battle : MonoBehaviour
                     menu1 = 0;
                     diddps = false;
                     incomp = false;
+                    GameObject.Find("murphy").GetComponent<SpriteRenderer>().flipX = true;
                     comp.SetActive(false);
                     fleche1.SetActive(false);
                     attack = false;
@@ -191,11 +192,13 @@ public class Player_Battle : MonoBehaviour
         if (menu2 == 0 && incomp && !inselect)
         {
             menu2 = 0;
+            GameObject.Find("murphy").GetComponent<SpriteRenderer>().flipX = true;
             incomp = false;
             GameObject.Find("talk").transform.position = new Vector3(0.0f, 3.796653f, 0f);
             comp.SetActive(false);
-            if (menu1 != 0)
+            if (menu1 != 0) {
                 menu1 -= 1;
+            }
             if (menu1 == 0)
                 GameObject.Find("description").GetComponent<TMPro.TextMeshProUGUI>().text = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().all_text[28];
             if (menu1 == 1)
@@ -211,12 +214,16 @@ public class Player_Battle : MonoBehaviour
         }
         else if (ininv)
         {
-            menu2 = 0;
             ininv = false;
+            GameObject.Find("murphy").GetComponent<SpriteRenderer>().flipX = true;
+            GameObject.Find("murphy").transform.position += new Vector3(0.0f, 0.3f * menu2, 0.0f);
             GameObject.Find("talk").transform.position = new Vector3(0.0f, 3.796653f, 0f);
+            menu2 = 0;
             inv.SetActive(false);
-            if (menu1 != 0)
+           /* if (menu1 != 0) {
                 menu1 -= 1;
+                GameObject.Find("murphy").transform.position += new Vector3(0.0f, 0.3f, 0.0f);
+            }*/
             if (menu1 == 0)
                 GameObject.Find("description").GetComponent<TMPro.TextMeshProUGUI>().text = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().all_text[28];
             if (menu1 == 1)
@@ -355,6 +362,7 @@ public class Player_Battle : MonoBehaviour
         else if (ininv && menu2 != 0)
         {
             menu2 -= 1;
+            GameObject.Find("murphy").transform.position += new Vector3(0.0f, 0.3f, 0.0f);
             GameObject.Find("description").GetComponent<TMPro.TextMeshProUGUI>().text = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().inventoryTexte[menu2];
         }
         else if (ininv)
@@ -362,8 +370,10 @@ public class Player_Battle : MonoBehaviour
         }
         else if (!incomp && !ininv)
         {
-            if (menu1 != 0)
+            if (menu1 != 0) {
                 menu1 -= 1;
+                GameObject.Find("murphy").transform.position += new Vector3(0.0f, 0.4f, 0.0f);
+            }
             if (menu1 == 0)
                 GameObject.Find("description").GetComponent<TMPro.TextMeshProUGUI>().text = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().all_text[28];
             if (menu1 == 1)
@@ -378,9 +388,10 @@ public class Player_Battle : MonoBehaviour
         if (incomp && !inselect)
         {
         }
-        else if (ininv && menu2 != 6)
+        else if (ininv && menu2 != 5)
         {
             menu2 += 1;
+            GameObject.Find("murphy").transform.position -= new Vector3(0.0f, 0.3f, 0.0f);
             GameObject.Find("description").GetComponent<TMPro.TextMeshProUGUI>().text = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().inventoryTexte[menu2];
         }
         else if (ininv)
@@ -388,8 +399,10 @@ public class Player_Battle : MonoBehaviour
         }
         else if (!incomp && !ininv)
         {
-            if (menu1 != 3)
+            if (menu1 != 2) {
                 menu1 += 1;
+                GameObject.Find("murphy").transform.position -= new Vector3(0.0f, 0.4f, 0.0f);
+            }
             if (menu1 == 0)
                 GameObject.Find("description").GetComponent<TMPro.TextMeshProUGUI>().text = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().all_text[28];
             if (menu1 == 1)
@@ -405,6 +418,9 @@ public class Player_Battle : MonoBehaviour
         {
             Object_usage();
             ininv = false;
+            GameObject.Find("murphy").GetComponent<SpriteRenderer>().flipX = true;
+            GameObject.Find("murphy").transform.position += new Vector3(0.0f, 0.4f * menu1, 0.0f);
+            GameObject.Find("murphy").transform.position += new Vector3(0.0f, 0.3f * menu2, 0.0f);
             inv.SetActive(false);
             GameObject.Find("talk").transform.position = new Vector3(0.0f, 3.796653f, 0f);
             menu2 = 0;
@@ -451,6 +467,7 @@ public class Player_Battle : MonoBehaviour
             {
                 textcomp.SetActive(true);
                 incomp = true;
+                GameObject.Find("murphy").GetComponent<SpriteRenderer>().flipX = false;
                 comp.SetActive(true);
                 GameObject.Find("description").GetComponent<TMPro.TextMeshProUGUI>().text = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().competenciesText[menu2];
                 GameObject.Find("competence Texte").GetComponent<TMPro.TextMeshProUGUI>().text = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().competencies[menu2];
@@ -459,6 +476,7 @@ public class Player_Battle : MonoBehaviour
             {
                 GameObject.Find("description").GetComponent<TMPro.TextMeshProUGUI>().text = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().inventoryTexte[menu2];
                 ininv = true;
+                GameObject.Find("murphy").GetComponent<SpriteRenderer>().flipX = false;
                 inv.SetActive(true);
             }
         }
@@ -467,6 +485,7 @@ public class Player_Battle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
         if (GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().Life == 0)
         {
             life1.SetActive(false);
@@ -491,9 +510,8 @@ public class Player_Battle : MonoBehaviour
             life2.SetActive(true);
             life3.SetActive(true);
         }
-        if (myturn)
+        if (myturn && GameObject.Find("dialogue").GetComponent<talk_battle>().dialognb == -1)
         {
-            timer += Time.deltaTime;
             Comp_usage();
             if (Input.GetKeyDown(KeyCode.E))
             {

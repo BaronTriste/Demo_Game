@@ -614,7 +614,8 @@ public class Ennemie_Script : MonoBehaviour
         if (nbmort >= 5)
         {
             GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().ennemieG[GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().nbActualFigth] = 1;
-            SceneManager.LoadScene("Main_Game");
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().toload = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().map[GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().location];
+            SceneManager.LoadScene("load_sceane");
         }
 
         if (GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Battle>().myturn == false)

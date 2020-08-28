@@ -22,7 +22,8 @@ public class EnnemieTrigger : MonoBehaviour
             GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().nbActualFigth = 0;
             GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().battleEnnemie = battleEnnemie;
             GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().posPlayer = GameObject.FindGameObjectWithTag("Player").transform.position;
-            SceneManager.LoadScene("Battle");
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().toload = "Menu";
+            SceneManager.LoadScene("load_sceane");
         }
     }
 }

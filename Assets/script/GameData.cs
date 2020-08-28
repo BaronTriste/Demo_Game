@@ -10,6 +10,10 @@ public class GameData : MonoBehaviour
     public GameObject obj;
     public int nbActualFigth;
     public int[] ennemieG;
+    public int[] quest;
+    public string[] map;
+    public string toload;
+    public int location;
     public string[] battleEnnemie;
     public string[] competencies;
     public string[] competenciesText;
@@ -23,6 +27,9 @@ public class GameData : MonoBehaviour
     void Start()
     {
         ennemieG = new int[] { 0, 0, 0, 0, 0, 0, 0 };
+        quest = new int[] { 0, 0, 0, 0};
+        map = new string[] { "shenty_town", "", "", "", "" };
+        location = 0;
         battleEnnemie = new string[] { "", "", "", "", "" };
         competencies = new string[] { " ", " ", " " };
         competenciesText = new string[] { "", "", "" };
@@ -36,9 +43,9 @@ public class GameData : MonoBehaviour
        // nom ennemie 10-15
        "squelette", "zombie", "rat", "Le nécromancien", "Le roi des rats", "",
        // nom objet  16-21
-       "potion", "", "", "", "", "",
+       "potion de lait", "grosse potion de lait", "sirop pour la toux", "", "", "",
        // texte objet  22-27
-       "Soigne un coeur", "", "", "", "", "",
+       "Soigne un coeur", "Soigne deux coeur", "augmente les dégats", "", "", "Ce n'est pas un objet valide",
        // texte combat 28-34
        "Lance une insulte !", "Utilise un objet de ton inventaire", "Fuir le combat", "vous lancer une insulte !", " vous attaque !", "", "",
        // dialog 35-42
@@ -46,7 +53,13 @@ public class GameData : MonoBehaviour
        // dialog PNG1 43-50
        "Salut !", "Salut...", ":)", "", "", "", "", "",
        // dialog PNG1 51-59
-        "Apuyer sur E", "", "", "", "", "", "", "", "" };
+        "Apuyer sur E", "", "", "", "", "", "", "", "",
+        // menu pause 60-77
+        "Inventaire", "UnderBook", "Option", "Menu Principale", "Resolution", "Plein Ecran", "Son Effect", "Son musique", "Utiliser", "Changer place", "jeter", "modifier touche", "sélectionner object...", "échanger avec...", "" , "", "", "",
+        // texte combat didactitielle 78-84
+        "Bon... ils ont engagée le combat en entrant en contact avec nous.", "En combat tu peux attaquer, utiliser un objet de ton inventaire ou t'enfuir (mais bon la on est coincée). Tu as déjà vaincu combien de monstre champions ?",
+        "Heu... Une fois j'ai déjà vaincu ma grand-mère, mais je cois qu'elle m'a laissée gagnée...", "Quoi ! Mais tu dois biens avoir des capacitées ou quoi ce soit.",
+        "Bas je sais pas...", "Bon attends, tu vois ce zombie ? Frappe le !", "OK !"};
         posPlayer = new Vector3(6.89f, -2.34f, 0.0f);
         Life = 3;
         inventory[0] = all_text[16];
@@ -66,12 +79,12 @@ public class GameData : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "Title")
+        if (scene.name == "Menu")
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
             Destroy(this.gameObject);
         }
-        if (scene.name == "Main_Game")
+        if (scene.name == "shenty_town")
         {
             for (int i = 0; i != 7; i++)
             {
@@ -81,13 +94,16 @@ public class GameData : MonoBehaviour
                     obj = GameObject.Find("Groupe_Ennemie" + i.ToString());
                     obj.SetActive(false);
                 }
-
             }
-            this.gameObject.SetActive(scene.name == "Main_Game");
+            this.gameObject.SetActive(true);
+        }
+        if (scene.name == "Battle")
+        {
+            this.gameObject.SetActive(true);
         }
         else
         {
-            this.gameObject.SetActive(scene.name == "Battle");
+            this.gameObject.SetActive(true);
         }
     }
 

@@ -15,12 +15,13 @@ public class boutton : MonoBehaviour
 
     public void loadNextScene(string sceneName)
     {
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>().toload = "shenty_town";
         SceneManager.LoadScene(sceneName);
     }
 
     void TaskOnClick()
     {
-        loadNextScene("Main_Game");
+        loadNextScene("load_sceane");
     }
 
     // Update is called once per frame

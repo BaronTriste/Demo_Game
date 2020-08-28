@@ -39,18 +39,23 @@ public class Save_Load : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "Title")
+        if (scene.name == "Menu")
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
             Destroy(this.gameObject);
         }
         if (scene.name == "Main_Game")
         {
-            this.gameObject.SetActive(scene.name == "Main_Game");
+            this.gameObject.SetActive(true);
+        }
+        if (scene.name == "Battle")
+        {
+            
+            this.gameObject.SetActive(true);
         }
         else
         {
-            this.gameObject.SetActive(scene.name == "Battle");
+            this.gameObject.SetActive(true);
         }
     }
 
